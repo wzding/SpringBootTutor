@@ -26,7 +26,7 @@ public class CourseController {
 
     @GetMapping(path = "/", produces = "application/json") //如果你用get方法 call我这个地址
     public HttpEntity findAllCourses(){
-        List<Course> allCourses = courseService.findAllCourses(); //我就帮你用这个方法来处理这个请求
+        List<Integer> allCourses = courseService.findAllCourses(); //我就帮你用这个方法来处理这个请求
 
         return new ResponseEntity<>(allCourses,HttpStatus.OK); // 我返回结果给你
     }
@@ -41,7 +41,7 @@ public class CourseController {
     @GetMapping(path = "/look-up/{inputString}", produces = "application/json")
     public HttpEntity<Course> searchCourse(@PathVariable("inputString") String inputString) {
 
-        List<Course> findedCourse = courseService.searchByCourseName(inputString);
+        List<Integer> findedCourse = courseService.searchByCourseName(inputString);
 
         return new ResponseEntity(findedCourse, HttpStatus.OK);
     }

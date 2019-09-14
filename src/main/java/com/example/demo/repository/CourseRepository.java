@@ -4,51 +4,38 @@ import com.example.demo.modal.Course;
 import com.example.demo.modal.Instructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class CourseRepository {
-    List<Course> courses = new ArrayList<>();
+    List<Integer> courses = new ArrayList<>();
 
     // constructor
     public CourseRepository() {
-        Course javaOne = Course.builder()
-                .className("Java I")
-                .instructor(new Instructor("Steve", "Jobs", "Phd", "TownHall201"))
-                .startDate(new Date("8/1/2018"))
-                .endDate(new Date("12/24/2018"))
-                .timeFrame("8am-10am")
-                .build();
-        Course two= Course.builder()
-                .className("Java II")
-                .instructor(new Instructor("Steve", "Jobs", "Phd", "TownHall201"))
-                .startDate(new Date("8/1/2018"))
-                .endDate(new Date("12/24/2018"))
-                .timeFrame("8am-10am")
-                .build();
-
-        courses.add(javaOne);
+        for(int i=0; i < 100; i++) {
+            courses.add(i);
+        }
     }
 
-
-    public List<Course> findAllClasses(){
+    public List<Integer> findAllCourses(){
         //链接数据库
         //返回数据库的信息
-        return  courses;
+        return courses;
     }
 
-    public List<Course> findAllCourse(String searchByCourseName){
+    public List<Integer> searchByCourseName(String target) {
+        int t = Integer.valueOf(target);
+        if (t < 0)
+            return Arrays.asList(-1, -1);
 
-        return new ArrayList<Course>();
-    }
-
-    public List<Course> findCourseByName(String courseName) {
-        if(courseName.equals("Java_I")) {
-            return courses;
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < courses.size(); i++) {
+            if(map.containsKey(courses.get(i))) {
+                return  Arrays.asList(map.get(courses.get(i)), i);
+            } else {
+                map.put(t-courses.get(i), i);
+            }
         }
-
-        return new ArrayList<Course>();
+        return  Arrays.asList(-1, -1);
     }
 }

@@ -16,14 +16,14 @@ public class CourseService {
     @Autowired
     CourseRepository courseRepository;
 
-    public List<Course> findAllCourses(){
+    public List<Integer> findAllCourses(){
 
-        return courseRepository.findAllClasses();
+        return courseRepository.findAllCourses();
     }
 
-    public List<Course> searchByCourseName(String input){
+    public List<Integer> searchByCourseName(String input){
 
-        return courseRepository.findCourseByName(input);
+        return courseRepository.searchByCourseName(input);
     }
 
 }
